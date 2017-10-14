@@ -1,7 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ABC
- * Date: 2017/10/14
- * Time: 上午 08:54
- */
+
+namespace App\Repositories;
+
+use App\User;
+use App\Task;
+
+class TaskRepository
+{
+    /**
+     * 取得給定使用者的所有任務。
+     *
+     * @param  User  $user
+     * @return Collection
+     */
+    public function forUser(User $user)
+    {
+        return Task::where('user_id', $user->id)
+            ->orderBy('created_at', 'asc')
+            ->get();
+    }
+}
